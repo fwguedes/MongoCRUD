@@ -1,0 +1,42 @@
+﻿
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+
+    @section Scripts {
+        <script type="text/javascript">
+        $(document).ready(function () {
+            $("#btnAdicionar").click(function () {
+
+
+                $.ajax({
+                    url: 'http://localhost:50063/api/LojaApi',
+                    type: 'GET',
+                    contentType: "application/json;charset=utf-8",
+                    success: function (data) {
+                        alert("foi");
+                    },
+                    error: function (x, y, z) {
+                        alert("nao foi");
+                    }
+                });
+
+
+            })
+        });
+
+        
+        </script>
+
+    }
+
+</head>
+<body>
+    <div>
+        @Html.ActionLink("Adicionar Nova Loja","Novo") 
+    </div>
+</body>
+</html>

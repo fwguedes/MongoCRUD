@@ -1,0 +1,104 @@
+﻿@model MongoCRUD.Models.LojaModel
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Nova Loja</title>
+    
+
+        @section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#btnAdicionar").click(function () {
+
+
+                $.ajax({
+                    url: 'http://localhost:50063/api/LojaApi',
+                    type: 'POST',
+                    data:  MontarJSON(),
+                    dataType: "json",
+                    contentType: "application/json;charset=utf-8",
+                    success: function (data) {
+                        alert("foi");
+                    },
+                    error: function (x, y, z) {
+                        alert("nao foi");
+                    }
+                });
+
+
+            })
+        });
+
+        function MontarJSON() {
+            var retorno;
+            retorno = { Nome: $("#txtNome").val(), Cnpj: $("#txtCnpj").val(), Endereco: $("#txtEndereco").val(), Setor: $("#txtSetor").val() }
+            return (JSON.stringify(retorno));
+        }
+    </script>
+
+            }
+    
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+
+        <div class="form-horizontal">
+            <h4>Nova Loja</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="txtNome">Nome da Loja</label>
+                        <input type="text" id="txtNome" name="Nome" class="form-control" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="txtCnpj">CNPJ</label>
+                        <input type="text" id="txtCnpj" name="Cnpj" class="form-control" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="txtEndereco">Endereço</label>
+                        <input type="text" id="txtEndereco" name="Endereco" class="form-control" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="txtSetor">Setor</label>
+                        <input type="text" id="txtSetor" name="Setor" class="form-control" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <input type="submit" id="btnAdicionar" value="Adicionar" class="form-control" />
+                </div>
+            </div>
+
+
+        </div>
+    }
+    
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</body>
+</html>
